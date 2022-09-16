@@ -42,6 +42,10 @@ function formatIdentifiers(s: string, quoteChars = '') {
     .join('.');
 }
 
+function formatSelectAll(s: string) {
+  return `SELECT * FROM ${S};`;
+}
+
 /**
  * Input fields for clipboard copy value sourcing
  * The input must be visible/displayed somewhere, in our case offscreen
@@ -275,6 +279,10 @@ function SchemaSidebar() {
 
           {/* Input fields for copy-paste value sourcing */}
           <OffScreenInput
+            id="schema-copy-value-select-all"
+            value={formatSelectAll(schemaItemId)}
+          />
+          <OffScreenInput
             id="schema-copy-value-no-quote"
             value={formatIdentifiers(schemaItemId)}
           />
@@ -307,6 +315,10 @@ function SchemaSidebar() {
             </MenuButton>
             <MenuPopover style={{ zIndex: 999999 }}>
               <MenuItems>
+                <CopyMenuItem
+                  id="#schema-copy-value-select-all"
+                  value={formatSelectAll(schemaItemId)}
+                />
                 <CopyMenuItem
                   id="#schema-copy-value-no-quote"
                   value={formatIdentifiers(schemaItemId)}
